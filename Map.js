@@ -1,7 +1,8 @@
 
-TILESETFILE = new Image();
-TILESETFILE.onload = function() { App.onInit() };
-TILESETFILE.src = "tileset.png";
+TILESETFILE = null;
+//TILESETFILE.onload = function() { App.onInit() };
+TILESETFILE = null;
+//TILESETFILE.src = "tileset.png";
 
 TILESIZE = 32;
 
@@ -19,10 +20,10 @@ function Map(w, h, CONTEXT)
 	var map = new Array();
 	for (var y = 0; y < this.h; y++) {
 		map[y] = new Array();
-		for (var x = 0; this.x < w; x++) {
+		for (var x = 0; x < w; x++) {
 			map[y][x] = new Tile(0, 0, false);
 		}
-	};	
+	}	
 	var CONTEXT = CONTEXT;
 
 	this.draw = function(X, Y)
@@ -30,8 +31,8 @@ function Map(w, h, CONTEXT)
 		for (var y = 0; y < this.h; y++) {
 			for (var x = 0; x < this.w; x++) {
 				CONTEXT.drawImage(	TILESETFILE,
-					       		map[y][x].ix,
-							map[y][x].iy,
+					       		map[y][x].ix * TILESIZE,
+							map[y][x].iy * TILESIZE,
 							TILESIZE,
 							TILESIZE,
 							x * TILESIZE + X,
@@ -41,13 +42,13 @@ function Map(w, h, CONTEXT)
 				);	
 			}
 		}
-	};
+	}
 	this.getSpace = function(x, y)
 	{
 		return map[y][x];
-	};
+	}
 	this.setSpace = function(val, x, y)
 	{
 		map[y][x] = val;
-	};
+	}
 }
