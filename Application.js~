@@ -15,8 +15,8 @@ function Application(w, h)
 
 		map.draw(0, 0);	
 		
-		CONTEXT.fillText(input.getMouseX() + ", " + input.getMouseY(), 10, 30);
-		CONTEXT.fillText("Floorspace: " + gen.floorspace, 10, 60);
+		CONTEXT.fillText(input.getMouseX() + ", " + input.getMouseY() + "\nFloorspace: " + gen.floorspace, 10, 30);
+		CONTEXT.fillText("Floorspace: " + gen.floorspace, 10, 50);
 	}
 	
 	var input = new Input();
