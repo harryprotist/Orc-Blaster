@@ -27,6 +27,7 @@ function Input()
 		mouseY = e.clientY;
 	}
 
+	// adds event listeners for mouse movement, clicking, and keypresses
 	document.addEventListener("mousedown", mouseDown, false);
 	document.addEventListener("mouseup", mouseUp, false);
 	document.addEventListener("mousemove", mouseMove, false);

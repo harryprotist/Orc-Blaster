@@ -51,7 +51,7 @@ Generator = function(map, ent)
 		}
 		return false;
 	}
-	this.generate = function()
+	this.generate = function() // Generates the game world
 	{
 		var tmp;
 		var floor;
@@ -60,7 +60,7 @@ Generator = function(map, ent)
 
 				floor = 50;	
 
-				
+				// Checks neighboring tiles, and changes probability of floor tiles based on that.
 				if (!(x == 0 || y == 0 || x == w - 1 || y == h - 1 )) {
 					if ((tmp = map.getSpace(x - 1, y - 1).ix == 1) && tmp.iy == 0) {
 						floor += 450;
@@ -86,9 +86,9 @@ Generator = function(map, ent)
 		}	
 
 		// second pass, for walls (and doors, later) 
-		///*
 		for (var y = 0; y < h; y++) {
 			for (var x = 0; x < w; x++) {
+				// if the current tile is 0,0, and it is bordering a floor, make it a wall
 				if ((getNeighborIds(x, y, 1, 0))
 				&& ((tmp = map.getSpace(x, y)).ix == 0 && tmp.iy == 0)) {
 					tmp = new Tile(2, 0, true);
@@ -106,7 +106,5 @@ Generator = function(map, ent)
 				}*/
 			}
 		}
-		//*/
-		// generate entities (to be implemented)
 	}
 }

@@ -1,5 +1,6 @@
 function Application(w, h) 
 {
+	// The html elements, and 2d context required for rendering
 	var CANVAS = document.getElementById("CANVAS");
 	var CONTEXT = CANVAS.getContext("2d");
 
