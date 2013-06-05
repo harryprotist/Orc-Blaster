@@ -13,8 +13,8 @@ function Input()
 	getTopOffset(CANVAS);
 
 	var keysDown = new Array();
-	var keyDown = function(e) { keysDown[e] == true; };
-	var keyUp = function(e) { delete keysDown[e]; };
+	var keyDown = function(e) { keysDown[e.keyCode] = true; };
+	var keyUp = function(e) { delete keysDown[e.keyCode]; };
 
 	var mouseDown = false;
 	var mouseDown = function(e) { mouseDown = true; };

@@ -7,6 +7,10 @@ function Application(w, h)
 	var map = new Map(w, h, CONTEXT);
 	var entitys = new Array();
 
+	var input = new Input();
+	var gen = new Generator(map, entitys);
+	gen.generate();
+
 	var onRender = function()
 	{
 		CONTEXT.fillStyle = "#FFFFFF";
@@ -16,13 +20,16 @@ function Application(w, h)
 
 		map.draw(0, 0);	
 		
+		// test for mouse movement
 		CONTEXT.fillText(input.getMouseX() + ", " + input.getMouseY(), 10, 30);
 		CONTEXT.fillText("Floorspace: " + gen.floorspace, 10, 60);
+
+		// test for keyboard input
+		if (input.getKey("A")) {
+			CONTEXT.fillText("A", 10, 90);
+		}
 	}
 	
-	var input = new Input();
-	var gen = new Generator(map, entitys);
-	gen.generate();
 	var onEvent = function(fps)
 	{
 			
