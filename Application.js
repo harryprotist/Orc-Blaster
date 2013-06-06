@@ -5,13 +5,23 @@ function Application(w, h)
 	var CONTEXT = CANVAS.getContext("2d");
 
 	var map = new Map(w, h, CONTEXT);
-	var entitys = new Array();
+	var entities = new Array();
 
 	var input = new Input();
-	var gen = new Generator(map, entitys);
+	var gen = new Generator(map, entities);
 	gen.generate();
 
-	var onRender = function()
+
+	var playerEnt = new Entity(Math.floor(Math.random()*(map.w)), Math.floor(Math.random()*(map.h)), map, entities);
+	entities.push(playerEnt);
+	var player = new PlayerEntity(playerEnt, 100, input);
+
+	var goalEnt = new Entity(Math.floor(Math.random()*(map.w)), Math.floor(Math.random()*(map.h)), map, entities);
+	entities.push(goalEnt);
+	var goal = new GoalEntity(goalEnt);
+
+
+	var onRender = function(fps)
 	{
 		CONTEXT.fillStyle = "#FFFFFF";
 		CONTEXT.fillRect(0, 0, 1280, 800);
@@ -23,6 +33,11 @@ function Application(w, h)
 		// test for mouse movement
 		CONTEXT.fillText(input.getMouseX() + ", " + input.getMouseY(), 10, 30);
 		CONTEXT.fillText("Floorspace: " + gen.floorspace, 10, 60);
+		CONTEXT.fillText("FPS: " + fps, 10, 160);
+
+		for (var i = 0; i < entities.length ; i++) {
+			entities[i].render(entities[i].x, entities[i].y);
+		}
 
 		// test for keyboard input
 		if (input.getKey("A")) {
@@ -32,7 +47,7 @@ function Application(w, h)
 	
 	var onEvent = function(fps)
 	{
-			
+		player.update(fps);	
 	}
 
 	var onCalc = function(fps)
@@ -48,13 +63,15 @@ function Application(w, h)
 		var delta = now - last;		
 		var fps = (delta / 1000);
 
-		onRender();
+		onEvent(fps);
+		onRender(fps);
 
 		last = now;
 	}
 
 	this.onInit = function()
 	{
+		player.init();
 		setInterval(main, 1);		
 	}
 }
