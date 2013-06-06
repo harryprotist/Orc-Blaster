@@ -5,7 +5,7 @@ TILESETFILE = null;
 //TILESETFILE.src = "tileset.png";
 
 
-TILESIZE = 32; // Universal variable for tilesize
+TILESIZE = 16; // Universal variable for tilesize
 
 function Tile(ix, iy, solid)
 {

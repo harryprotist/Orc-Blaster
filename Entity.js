@@ -1,4 +1,4 @@
-function Entity(x, y, map, entities)
+function Entity(x, y, map, entities, imgSrc)
 {
 
 	this.CANVAS = document.getElementById("CANVAS");
@@ -21,13 +21,12 @@ function Entity(x, y, map, entities)
 	
 	//To be used for collision and the initial call to setPos() 
 	var posSet=false;
-	var positionSet=false;
 	
 	var collision=false;
 	
 	imageObj = new Image();
 		
-	imageObj.src = 'http://cdn1.iconfinder.com/data/icons/august/PNG/Star%20Orange.png';
+	imageObj.src = 'http://inspiremebaby.com/wp-content/uploads/2013/02/star.png';
 	
 	
 	/*this.update=function()
@@ -43,20 +42,15 @@ function Entity(x, y, map, entities)
 		
 		this.setPos(this.x, this.y);
 		
-		positionSet=true;
-		
 		this.render(this.x, this.y);
 		
 	}
 	
 	this.setPos=function(x, y)
 	{
-		
-		for(var i=0; i<this.entities.length; i++)
-		{
 			do
 			{
-				if(!(this.Map.getSpace(x, y).solid)&&this.entities[i].pos!=this.Map.getSpace(x, y))
+				if(!(this.Map.getSpace(x, y).solid))
 				{
 					this.pos=this.Map.getSpace(x, y);
 					posSet=true;
@@ -72,26 +66,6 @@ function Entity(x, y, map, entities)
 				}
 			}
 			while(posSet=false)
-		}
-
-		if(positionSet=true)
-		{
-			for(var i=0; i<this.entities.length; i++)
-			{
-				if(!(this.Map.getSpace(x, y).solid)&&this.entities[i].pos!=this.Map.getSpace(x, y))
-				{
-					this.pos=this.Map.getSpace(x, y);
-				}
-				else if(this.Map.getSpace(x, y)==null)
-				{
-					collision=true;
-				}
-				else
-				{
-					collision=true;
-				}
-			}
-		}
 		
 	}
 	

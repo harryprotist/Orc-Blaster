@@ -106,9 +106,14 @@ function PlayerEntity(entity, health, input)
 		
 	}
 
-	this.takeDamage=function()
+	this.getPos=function()
 	{
-		//may not need this
+		return player.pos;
+	}
+
+	this.getMoves=function()
+	{
+		return this.moves;
 	}
 
 	this.collide=function()

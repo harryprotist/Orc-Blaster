@@ -1,8 +1,17 @@
-function GoalEntity(entity)
+function GoalEntity(entity, player)
 {
+	
+	var date=new Date();
+	
+	var last=date.getMinutes();
 	
 	var goal=entity;
 	
+	this.player=player;
+	
+	var moves=this.player.moves;
+	
+	var alert1=true;
 	
 	this.init=function()
 	{
@@ -11,16 +20,14 @@ function GoalEntity(entity)
 	
 	this.update=function()
 	{
+		goal.render(goal.x, goal.y);
 		
-	}
-	
-	this.winner=function()
-	{
-		
-	}
-	
-	this.collide=function()
-	{
-		
+		if(goal.pos==player.getPos())
+		{
+			alert("You won!");
+			goal.pos=null;
+			
+			document.location.reload(true);
+		}
 	}
 }

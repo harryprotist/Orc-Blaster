@@ -18,7 +18,7 @@ function Application(w, h)
 
 	var goalEnt = new Entity(Math.floor(Math.random()*(map.w)), Math.floor(Math.random()*(map.h)), map, entities);
 	entities.push(goalEnt);
-	var goal = new GoalEntity(goalEnt);
+	var goal = new GoalEntity(goalEnt, player);
 
 
 	var onRender = function(fps)
@@ -26,28 +26,29 @@ function Application(w, h)
 		CONTEXT.fillStyle = "#FFFFFF";
 		CONTEXT.fillRect(0, 0, 1280, 800);
 		CONTEXT.font = "24px Arial";
-		CONTEXT.fillText(input.getMouseX() + ", " + input.getMouseY(), 10, 10);
+		//CONTEXT.fillText(input.getMouseX() + ", " + input.getMouseY(), 10, 10);
 
 		map.draw(0, 0);	
 		
 		// test for mouse movement
-		CONTEXT.fillText(input.getMouseX() + ", " + input.getMouseY(), 10, 30);
-		CONTEXT.fillText("Floorspace: " + gen.floorspace, 10, 60);
-		CONTEXT.fillText("FPS: " + fps, 10, 160);
+		//CONTEXT.fillText(input.getMouseX() + ", " + input.getMouseY(), 10, 30);
+		//CONTEXT.fillText("Floorspace: " + gen.floorspace, 10, 60);
+		//CONTEXT.fillText("FPS: " + fps, 10, 160);
 
 		for (var i = 0; i < entities.length ; i++) {
 			entities[i].render(entities[i].x, entities[i].y);
 		}
 
-		// test for keyboard input
+		/*test for keyboard input
 		if (input.getKey("A")) {
 			CONTEXT.fillText("A", 10, 90);
-		}
+		}*/
 	}
 	
 	var onEvent = function(fps)
 	{
 		player.update(fps);	
+		goal.update();
 	}
 
 	var onCalc = function(fps)
@@ -72,11 +73,12 @@ function Application(w, h)
 	this.onInit = function()
 	{
 		player.init();
+		goal.init();
 		setInterval(main, 1);		
 	}
 }
 
-App = new Application(40, 25);
+App = new Application(60, 39);
 TILESETFILE = new Image();
 TILESETFILE.onload = function() { App.onInit() };
 TILESETFILE.src = "tileset.png";
